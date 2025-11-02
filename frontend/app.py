@@ -3,17 +3,24 @@ import requests
 
 BACKEND_URL = "http://127.0.0.1:8080/ask" 
 
-st.set_page_config(page_title="Customer Support Duo", page_icon="🤖", layout="centered")
+st.set_page_config(page_title="Jio Support Assistant", page_icon="📱", layout="centered")
 
-st.title("💬 Customer Support Assistant (Sales + Tech)")
+st.title("💬 Jio Customer Support Assistant")
 
 st.markdown(
     """
-    This assistant connects you with a **Sales Agent** or **Tech Expert** depending on your query type.
-    - 💼 Sales questions are answered immediately.
-    - 🛠️ Technical issues are handled by the Tech Expert.
+    Welcome to the **Jio Support Assistant** — your all-in-one helpdesk powered by AI 🤖.
+
+    Whether you need details about **Jio plans, recharges, or services**, or are facing a **technical issue** with your Jio network, 
+    our smart assistant is here to help.
+
+    - 💼 **Sales & Plan Enquiries:** Instantly handled by the **Jio Sales Agent** — get details on JioFiber, JioAirFiber, and Mobile Plans.  
+    - 🛠️ **Technical Support:** If your query is about connectivity, app issues, or setup problems, the **Jio Tech Expert** will assist you right away.
+
+    _Powered by Jio’s digital innovation — Always with you, always Jio!_
     """
 )
+
 
 # Initialize chat history in session state
 if "messages" not in st.session_state:
