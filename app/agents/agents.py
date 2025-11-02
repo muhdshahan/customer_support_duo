@@ -48,6 +48,7 @@ class SalesAgent:
             * *Example Output:* `[ACTION: TRANSFER_TO_TECH]`
         * Do not use any other format for the action tag.
         * Do not mention the internal action tag or the transfer process to the user.
+        * **Analyze the conversation history** to understand the full context, if there is a chat history then don't use a Hello! message like you are new to the user.
         """
         if context:
             response = self.model.generate_content(system_prompt +"\n"+ query + "\n" + context)
@@ -75,6 +76,7 @@ class TechAgent:
         1. **Acknowledge the Handover** briefly (e.g., "Hello, I see the Sales team flagged a crash report...").
         2. **Analyze the conversation history** to understand the full context of the issue.
         3. Provide clear, step-by-step troubleshooting or explain the solution professionally.
+        3. If there is a chat history, never include a Hello as if you are new to the user.
         """
 
         if context:
