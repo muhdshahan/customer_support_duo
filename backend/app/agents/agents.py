@@ -10,7 +10,7 @@ genai.configure(api_key=APIKEY)
 class SalesAgent:
     """
     SalesAgent:
-    - respond(query, context) -> for sales questions returns conversational text
+    - respond(context) -> for sales questions returns conversational text
     - for technical questions returns exactly the tag: "[ACTION: TRANSFER_TO_TECH]"
     """
 

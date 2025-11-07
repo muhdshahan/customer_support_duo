@@ -2,8 +2,17 @@ from fastapi import FastAPI
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
 from app.graph.support_graph import support_graph
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI(title="Customer Support Duo")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],      # allow Streamlit frontend
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # --- Define the structure for chat history ---
 class Message(BaseModel):
