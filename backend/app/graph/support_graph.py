@@ -4,7 +4,6 @@ from typing import TypedDict, Optional
 
 # Define the state schema
 class SupportState(TypedDict):
-    query: str
     context: Optional[str]  
     response: Optional[str]
     next_agent: Optional[str]
@@ -20,10 +19,9 @@ def sales_node(state: SupportState):
     - If SalesAgent returns the transfer tag, set next_agent="tech", agent=None (or "sales" if you want an explicit tag)
     - Otherwise set next_agent="end" and agent="sales"
     """
-    query = state["query"]
     context = state.get("context", None)
 
-    reply = sales.respond(query, context)
+    reply = sales.respond(context)
     # Default values
     state["response"] = None
     state["agent"] = None
@@ -46,13 +44,12 @@ def sales_node(state: SupportState):
 def tech_node(state: SupportState):
     """
     Tech node:
-    - Calls TechAgent.respond(query, context) and returns final response.
+    - Calls TechAgent.respond(context) and returns final response.
     - Tech always ends.
     """
-    query = state["query"]
     context = state.get("context", None)
 
-    reply = tech.respond(query, context)
+    reply = tech.respond(context)
     state["response"] = reply
     state["agent"] = "tech_agent"
     state["next_agent"] = "end"

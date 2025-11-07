@@ -13,7 +13,6 @@ class Message(BaseModel):
 
 # --- Request body schema ---
 class QueryRequest(BaseModel):
-    query: str = Field(..., description="User's current question")
     history: Optional[List[Message]] = Field(default=None, description="Previous chat messages")
 
 @app.post("/ask")
@@ -28,7 +27,7 @@ async def ask_support(request: QueryRequest):
             context += f"{msg.role.capitalize()}: {msg.content}\n"
 
     # Combine context + current query        
-    state = {"query": request.query, "context": context.strip()}
+    state = {"context": context.strip()}
 
     # Invoke LangGraph chain
     final_state = await support_graph.ainvoke(state)

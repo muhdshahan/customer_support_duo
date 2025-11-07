@@ -61,8 +61,7 @@ if user_input := st.chat_input("Type your question..."):
             try:
                 response = requests.post(
                     BACKEND_URL,
-                    json={"query": user_input,
-                          "history": recent_context
+                    json={"history": recent_context
                     },
                     timeout=300
                 )
@@ -77,7 +76,7 @@ if user_input := st.chat_input("Type your question..."):
 
                 # Save assistant message
                     st.session_state["messages"].append({
-                        "role": "assistant",
+                        "role": "model",
                         "content": assistant_response,
                         "agent": agent
                     })

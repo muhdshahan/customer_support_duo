@@ -18,7 +18,7 @@ class SalesAgent:
         # Initialize Gemini client
         self.model = genai.GenerativeModel(model_name)
 
-    def respond(self, query: str, context: Optional[str] = None):
+    def respond(self, context: Optional[str] = None):
         """
         Generates a response and includes an action tag for the orchestrator.
         """
@@ -62,11 +62,8 @@ class SalesAgent:
         * **Analyze the conversation history** to understand the full context. If there is chat history, don’t use greetings like “Hello!” or “Hi there!” as if you are new.
         """
 
-        if context:
-            response = self.model.generate_content(system_prompt +"\n"+ query + "\n" + context)
-        else:
-            response = self.model.generate_content(system_prompt +"\n"+ query)
-
+        response = self.model.generate_content(system_prompt +"\n" + context)
+        
         return response.text
     
 
@@ -78,7 +75,7 @@ class TechAgent:
     def __init__(self, model_name: str = "gemini-2.0-flash"):
         self.model = genai.GenerativeModel(model_name)
 
-    def respond(self, query: str, context: Optional[str] = None):
+    def respond(self, context: Optional[str] = None):
         """
         Generates a technical support response using the previous chat history for context.
         """
@@ -101,9 +98,6 @@ class TechAgent:
         5. If there is chat history, do **not** include a fresh greeting like “Hello” — continue the conversation contextually.
         6. Be concise yet empathetic — show that you genuinely want to resolve the user’s issue quickly.
         """
-        if context:
-            response = self.model.generate_content(system_prompt +"\n"+ query + "\n" + context)
-        else:
-            response = self.model.generate_content(system_prompt +"\n"+ query)
+        response = self.model.generate_content(system_prompt +"\n"+ context)
 
         return response.text
